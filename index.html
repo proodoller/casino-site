@@ -1,48 +1,87 @@
-<h2>Coinflip</h2>
-
-<input id="bet2" placeholder="Enter bet">
-<button onclick="flip()">Flip Coin</button>
-
-<p id="coinresult"></p>
-
-<script>
-function flip(){
-let bet = Number(document.getElementById("bet2").value);
-let flip = Math<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 <title>My Casino</title>
+
+<style>
+body{
+background:#0f172a;
+color:white;
+font-family:sans-serif;
+text-align:center;
+}
+
+.box{
+background:#1e293b;
+padding:20px;
+margin:20px;
+border-radius:10px;
+display:inline-block;
+}
+
+button{
+padding:10px;
+background:#22c55e;
+border:none;
+color:white;
+border-radius:5px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center;font-family:sans-serif;">
-<h1>My Casino 🎰</h1>
-<p>Welcome to my demo gambling site</p>
+<body>
+
+<h1>🎰 My Casino</h1>
 
 <p>Balance: <span id="balance">100</span></p>
 
-<input id="bet" placeholder="Enter bet">
-<button onclick="play()">Roll Dice</button>
-
+<div class="box">
+<h2>🎲 Dice</h2>
+<input id="bet" placeholder="Bet">
+<button onclick="play()">Roll</button>
 <p id="result"></p>
+</div>
+
+<div class="box">
+<h2>🪙 Coinflip</h2>
+<input id="bet2" placeholder="Bet">
+<button onclick="flip()">Flip</button>
+<p id="coinresult"></p>
+</div>
 
 <script>
-let balance = 100;
+let balance=100;
 
 function play(){
-let bet = Number(document.getElementById("bet").value);
-let roll = Math.floor(Math.random()*6)+1;
+let bet=Number(document.getElementById("bet").value);
+let roll=Math.floor(Math.random()*6)+1;
 
-if(bet > balance){
-document.getElementById("result").innerText="Not enough balance";
-return;
+if(bet>balance)return;
+
+if(roll>3){
+balance+=bet;
+document.getElementById("result").innerText="Win Dice:"+roll;
+}else{
+balance-=bet;
+document.getElementById("result").innerText="Lose Dice:"+roll;
 }
 
-if(roll > 3){
-balance += bet;
-document.getElementById("result").innerText="You win! Dice: "+roll;
+document.getElementById("balance").innerText=balance;
+}
+
+function flip(){
+let bet=Number(document.getElementById("bet2").value);
+let coin=Math.random()<0.5?"Heads":"Tails";
+
+if(bet>balance)return;
+
+if(coin=="Heads"){
+balance+=bet;
+document.getElementById("coinresult").innerText="Win "+coin;
 }else{
-balance -= bet;
-document.getElementById("result").innerText="You lose! Dice: "+roll;
+balance-=bet;
+document.getElementById("coinresult").innerText="Lose "+coin;
 }
 
 document.getElementById("balance").innerText=balance;
