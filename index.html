@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>My Casino</title>
+</head>
 
+<body style="text-align:center;font-family:sans-serif;">
+<h1>My Casino 🎰</h1>
+<p>Welcome to my demo gambling site</p>
+
+<p>Balance: <span id="balance">100</span></p>
+
+<input id="bet" placeholder="Enter bet">
+<button onclick="play()">Roll Dice</button>
+
+<p id="result"></p>
+
+<script>
+let balance = 100;
+
+function play(){
+let bet = Number(document.getElementById("bet").value);
+let roll = Math.floor(Math.random()*6)+1;
+
+if(bet > balance){
+document.getElementById("result").innerText="Not enough balance";
+return;
+}
+
+if(roll > 3){
+balance += bet;
+document.getElementById("result").innerText="You win! Dice: "+roll;
+}else{
+balance -= bet;
+document.getElementById("result").innerText="You lose! Dice: "+roll;
+}
+
+document.getElementById("balance").innerText=balance;
+}
+</script>
+
+</body>
+</html>
